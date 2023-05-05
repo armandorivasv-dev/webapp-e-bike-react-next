@@ -9,10 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/joy": "^5.0.0-alpha.77",
+    "@mui/material": "^5.12.1",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "formik": "^2.2.9",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "next": "13.3.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.0",
+    "react-router-dom": "^6.10.0",
+    "stripe": "^12.3.0",
+    "stripe-client": "^1.1.5",
+    "yup": "^1.1.1"
   }
 }
