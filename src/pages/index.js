@@ -11,6 +11,7 @@ import UserInfo from "@/components/Account/UserInfo";
 import { getUserApi } from "@/services/api/auth";
 import useAuth from "@/hooks/useAuth";
 import ProductNews from "@/components/Home/ProductNews";
+import Search from "@/components/Search/SearchProductsBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,6 +43,7 @@ export default function Home() {
 
       <main className={styles.main}>
         {!user ? <h1>Cargando...</h1> : <UserInfo user={user} />}
+        <Search />
         <ProductNews />
         {/* <Image
           width="250"

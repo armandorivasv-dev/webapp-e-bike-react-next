@@ -23,8 +23,6 @@ const Cart = () => {
 
   const [totalPayment, setTotalPayment] = useState(null);
 
-  console.log("selectedAddress", selectedAddress);
-
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -50,7 +48,6 @@ const Cart = () => {
 
   const getAddresses = async () => {
     const response = await getAddressesApi(auth);
-    console.log("response", response);
     setAddresses(response.data);
   };
 

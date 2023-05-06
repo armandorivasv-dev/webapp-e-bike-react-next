@@ -16,10 +16,10 @@ const ProductNewsList = (props) => {
 
   const { push } = useRouter();
 
-  const goToProduct = (id) => {
-    console.log(id);
-    push("/product/product", { id });
-  };
+  // const goToProduct = (id) => {
+  //   console.log(id);
+  //   push("/product/product", { id });
+  // };
   return (
     <>
       <Grid container spacing={2}>

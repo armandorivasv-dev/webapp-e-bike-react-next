@@ -1,6 +1,5 @@
-"use client";
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -36,6 +35,8 @@ import logo from "../../../public/assets/logo.png";
 import Image from "next/image";
 import { grey } from "@mui/material/colors";
 import Grid from "@mui/material/Grid";
+import Badge from "@mui/material/Badge";
+import { getProductCartApi } from "@/services/api/cart";
 
 const colorAppBar = grey[500];
 
@@ -44,10 +45,40 @@ const drawerWidth = 240;
 function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [badgeCart, setBadgeCart] = useState(null);
+  const [reloadBadgeCart, setReloadBadgeCart] = useState(true);
+  const [badgeFavorite, setBadgeFavorite] = useState(null);
 
   const { logout } = useAuth();
 
   // const router = useRouter();
+
+  // useEffect(() => {
+  //   if (reloadCart) {
+  //     getProductCart();
+  //     setReloadCart(false);
+  //   }
+  // }, [reloadCart]);
+
+  // const getProductCart = async () => {
+  //   const response = await getProductCartApi();
+  //   setCart(response);
+  // };
+
+  useEffect(() => {
+    if (reloadBadgeCart) {
+      getProductCart();
+      setReloadBadgeCart(false);
+    }
+  }, [reloadBadgeCart]);
+
+  const getProductCart = async () => {
+    const response = await getProductCartApi();
+    console.log("response", response);
+    setBadgeCart(response.length);
+  };
+
+  console.log("reloadBadgeCart", reloadBadgeCart);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -77,8 +108,11 @@ function ResponsiveDrawer(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <ShoppingCartIcon />
+                <Badge badgeContent={badgeCart} color="primary">
+                  <ShoppingCartIcon />
+                </Badge>
               </ListItemIcon>
+
               <ListItemText primary="Carrito" />
             </ListItemButton>
           </ListItem>
@@ -97,7 +131,9 @@ function ResponsiveDrawer(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <FavoriteIcon />
+                <Badge badgeContent={4} color="primary">
+                  <FavoriteIcon />
+                </Badge>
               </ListItemIcon>
               <ListItemText primary="Favoritos" />
             </ListItemButton>
