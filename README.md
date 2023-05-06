@@ -1,6 +1,6 @@
 # E-BIKE - App Web Ecommerce
 
-## Desarrollada con React, Next13, Strapi (backend) y Stripe (Sistema de pagos)
+## Desarrollada con React, Next13 y Strapi (backend).
 
 ## _Descripción_
 
