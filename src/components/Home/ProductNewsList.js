@@ -10,6 +10,7 @@ import Image from "next/image";
 import { API_URL } from "../../utils/constants";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import ProductPriceList from "../product/ProductPriceList";
 
 const ProductNewsList = (props) => {
   const { products } = props;
@@ -39,6 +40,10 @@ const ProductNewsList = (props) => {
                 <Typography variant="body2" color="text.secondary" gutterBottom>
                   {product.attributes.description}
                 </Typography>
+                <ProductPriceList
+                  price={product.attributes.price}
+                  discount={product.attributes.discount}
+                />
               </CardContent>
               <CardActions>
                 <Link href={`/product/${product.id}`}>

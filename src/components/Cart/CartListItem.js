@@ -2,17 +2,12 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Image from "next/image";
 import { API_URL } from "../../utils/constants";
-import Link from "next/link";
 import Box from "@mui/material/Box";
-import ProductPrice from "../product/ProductPrice";
-import ProductQuantity from "../product/ProductQuantity";
-import { calcPrice } from "@/utils/functions";
+import { calcPrice, mountNormalize } from "@/utils/functions";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import IconButton from "@mui/material/IconButton";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
@@ -26,8 +21,6 @@ import {
 
 const CartListItem = (props) => {
   const { product, setReloadCart } = props;
-
-  console.log("cartlistitem - product", product);
 
   const deleteProductCart = async () => {
     const response = await deleteProductCartApi(product.data.id);
@@ -49,101 +42,90 @@ const CartListItem = (props) => {
       {!product ? (
         <h1>Cargando...</h1>
       ) : (
-        <>
-          <Card sx={{ display: "flex", maxWidth: 900, mt: 4 }}>
+        <Card sx={{ display: "flex", maxWidth: 950, direction: "row", mt: 4 }}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+          >
             <Image
-              width="200"
-              height="250"
-              alt="Images"
+              width="180"
+              height="230"
+              alt={product.data.attributes.description}
               src={`${API_URL}${product.data.attributes.main_image.data.attributes.url}`}
             />
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <CardContent>
-                <Typography gutterBottom variant="h4" component="div">
-                  {product.data.attributes.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" gutterBottom>
-                  {product.data.attributes.description}
-                </Typography>
-                <Typography variant="h5" gutterBottom>
-                  {calcPrice(
+            <CardContent>
+              <Typography gutterBottom variant="h4" component="div">
+                {product.data.attributes.title}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                {product.data.attributes.description}
+              </Typography>
+              <Typography variant="h5" gutterBottom>
+                $
+                {mountNormalize(
+                  calcPrice(
                     product.data.attributes.price,
                     product.data.attributes.discount
-                  )}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="flex-end"
-                  alignItems="center"
-                  width="600px"
-                >
-                  <IconButton
-                    aria-label="incrementar"
-                    onClick={() => {
-                      increaseProductCart();
-                    }}
-                  >
-                    <AddCircleIcon
-                      fontSize="large"
-                      color="primary"
-                    ></AddCircleIcon>
-                  </IconButton>
-                  <TextField
-                    margin="normal"
-                    name="quantity"
-                    id="quantity"
-                    variant="outlined"
-                    sx={{ width: 50 }}
-                    // onChange={(event) =>
-                    //   formik.setFieldValue("password", event.target.value)
-                    // }
-                    value={product.quantity}
-                  />
-                  <IconButton
-                    aria-label="decrementar"
-                    onClick={() => {
-                      decreaseProductCart();
-                    }}
-                  >
-                    <RemoveCircleIcon
-                      fontSize="large"
-                      color="primary"
-                    ></RemoveCircleIcon>
-                  </IconButton>
-                  <IconButton
-                    aria-label="Borrar del carrito"
-                    onClick={() => {
-                      deleteProductCart();
-                    }}
-                  >
-                    <CancelIcon fontSize="large"></CancelIcon>
-                  </IconButton>
-                  {/* <ProductQuantity
-                  quantity={quantity}
-                  setQuantity={setQuantity}
-                /> */}
-                  {/* <ProductBuy product={product} quantity={quantity} /> */}
-                  {/* <ProductFavorite product={product.id} /> */}
-                  {/* <Link href={`/product/${product.id}`}>
-                <Button
-                  size="small"
-                  // onClick={() => {
-                  //   goToProduct(product.id);
-                  // }}
-                >
-                  Ver mas
-                </Button>
-              </Link> */}
-
-                  {/* <Button size="small">Learn More</Button> */}
-                </Grid>
-              </CardActions>
-            </Box>
-          </Card>
-        </>
+                  )
+                )}
+              </Typography>
+            </CardContent>
+          </Grid>
+          <CardActions>
+            <Grid
+              container
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="center"
+              width="200px"
+            >
+              <IconButton
+                aria-label="incrementar"
+                onClick={() => {
+                  increaseProductCart();
+                }}
+              >
+                <AddCircleIcon
+                  fontSize="medium"
+                  color="primary"
+                ></AddCircleIcon>
+              </IconButton>
+              <TextField
+                margin="normal"
+                name="quantity"
+                id="quantity"
+                variant="outlined"
+                sx={{ width: 50 }}
+                size="small"
+                // onChange={(event) =>
+                //   formik.setFieldValue("password", event.target.value)
+                // }
+                value={product.quantity}
+              />
+              <IconButton
+                aria-label="decrementar"
+                onClick={() => {
+                  decreaseProductCart();
+                }}
+              >
+                <RemoveCircleIcon
+                  fontSize="medium"
+                  color="primary"
+                ></RemoveCircleIcon>
+              </IconButton>
+              <IconButton
+                aria-label="Borrar del carrito"
+                onClick={() => {
+                  deleteProductCart();
+                }}
+              >
+                <CancelIcon fontSize="medium"></CancelIcon>
+              </IconButton>
+            </Grid>
+          </CardActions>
+        </Card>
       )}
     </>
   );

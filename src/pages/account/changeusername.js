@@ -67,8 +67,8 @@ const ChangeUsername = () => {
       <Box
         component="form"
         sx={{
-          "& .MuiTextField-root": { mb: 1, mr: 1, width: "71ch" },
-          "& .MuiButton-root": { width: "79ch" },
+          "& .MuiTextField-root": { mb: 1, mr: 1, width: "35ch" },
+          "& .MuiButton-root": { width: "39ch" },
         }}
         noValidate
         autoComplete="on"

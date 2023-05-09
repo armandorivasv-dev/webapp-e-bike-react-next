@@ -74,6 +74,7 @@ const Cart = () => {
             setReloadCart={setReloadCart}
             setTotalPayment={setTotalPayment}
           />
+
           {!addresses ? (
             <h1>Cargando...</h1>
           ) : (

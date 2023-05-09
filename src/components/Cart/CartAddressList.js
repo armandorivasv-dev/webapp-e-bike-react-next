@@ -60,23 +60,13 @@ const CartAddressList = (props) => {
           {addresses.map((address) => (
             <Card
               key={address.id}
-              sx={{ display: "flex", maxWidth: 900, mb: 2 }}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                maxWidth: 950,
+                mb: 2,
+              }}
             >
-              <CardActions>
-                <Grid
-                  container
-                  direction="colunm"
-                  justifyContent="center"
-                  alignItems="center"
-                  width="50px"
-                >
-                  <FormControlLabel
-                    value={address.id}
-                    control={<Radio />}
-                    // label={address.attributes.title}
-                  />
-                </Grid>
-              </CardActions>
               <CardContent>
                 <Typography variant="h5" component="h1" gutterBottom>
                   {address.attributes.title}
@@ -114,6 +104,21 @@ const CartAddressList = (props) => {
                   Teléfono: {address.attributes.phone}
                 </Typography>
               </CardContent>
+              <CardActions>
+                <Grid
+                  container
+                  direction="colunm"
+                  justifyContent="center"
+                  alignItems="center"
+                  width="50px"
+                >
+                  <FormControlLabel
+                    value={address.id}
+                    control={<Radio />}
+                    // label={address.attributes.title}
+                  />
+                </Grid>
+              </CardActions>
             </Card>
           ))}
         </RadioGroup>

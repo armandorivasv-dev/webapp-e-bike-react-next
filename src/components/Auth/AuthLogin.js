@@ -11,9 +11,11 @@ import * as Yup from "yup";
 import useAuth from "@/hooks/useAuth";
 import logo from "../../../public/assets/logo.png";
 import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
 
 const AuthLogin = (props) => {
   const { changeForm } = props;
+
   const [message, setMessage] = useState("Ingrese usuario y password");
 
   const { login } = useAuth();
@@ -22,29 +24,15 @@ const AuthLogin = (props) => {
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (formData) => {
-      console.log("formData--->", formData);
       try {
         const response = await loginApi(formData);
-        //if (response.error) throw "Error en usuario o contraseña!!!";
+        if (response.error) throw "Error en usuario o contraseña!!!";
         login(response);
-        console.log("response--->", response);
       } catch (error) {
-        console.log(error);
+        await toast(error);
       }
     },
   });
-
-  // const handleSubmit = async (formData) => {
-  //   formData.preventDefault();
-  //   const data = new FormData(formData.currentTarget);
-  //   console.log("authlogin.js data", data);
-  //   try {
-  //     const response = await loginApi(data);
-  //     console.log("response--->", response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <Container maxWidth="xs" sx={{ mt: 5, backgroundColor: "#fff" }}>
@@ -57,9 +45,6 @@ const AuthLogin = (props) => {
         }}
       >
         <Image width="100" height="100" alt="Images" src={logo} />
-        {/* <Avatar sx={{ m: 1, bgcolor: 'secundary.main' }}>
-      <LockOutlinedIcon />
-    </Avatar> */}
         <Typography
           variant="h6"
           gutterBottom
@@ -73,7 +58,6 @@ const AuthLogin = (props) => {
           sx={{ m: 1, width: "40ch" }}
           noValidate
           autoComplete="on"
-          //onSubmit={() => formik.handleSubmit()}
         >
           <TextField
             margin="normal"
@@ -107,7 +91,6 @@ const AuthLogin = (props) => {
               variant="outlined"
               color="inherit"
               fullWidth
-              //onClick={formik.handleSubmit}
               onClick={() => {
                 formik.handleSubmit();
               }}
@@ -120,7 +103,6 @@ const AuthLogin = (props) => {
               variant="outlined"
               color="inherit"
               fullWidth
-              //onClick={formik.handleSubmit}
               onClick={() => {
                 changeForm();
               }}
@@ -159,6 +141,7 @@ const AuthLogin = (props) => {
           </Box>
         </Box>
       </Box>
+      <Toaster position="top-center" duration="4000" />
     </Container>
   );
 };

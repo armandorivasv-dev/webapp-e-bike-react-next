@@ -73,7 +73,7 @@ const ChangeName = () => {
         component="form"
         sx={{
           "& .MuiTextField-root": { mb: 1, mr: 1, width: "35ch" },
-          "& .MuiButton-root": { width: "79ch" },
+          "& .MuiButton-root": { width: "39ch" },
         }}
         noValidate
         autoComplete="on"
@@ -117,7 +117,7 @@ const ChangeName = () => {
             variant="outlined"
             color="inherit"
             size="large"
-            fullWidth
+            //fullWidth
             onClick={() => {
               handleClickOpen();
             }}

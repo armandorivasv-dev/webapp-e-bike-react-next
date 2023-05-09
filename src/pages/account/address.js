@@ -34,7 +34,7 @@ const Address = () => {
       </div>
       <Box
         sx={{
-          "& .MuiButton-root": { width: "79ch", mb: 2 },
+          "& .MuiButton-root": { width: "39ch", mb: 2 },
         }}
         noValidate
         autoComplete="on"

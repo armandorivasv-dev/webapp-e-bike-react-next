@@ -17,6 +17,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { deleteCartApi, paymentCartApi } from "@/services/api/cart";
 import { addOrderApi } from "@/services/api/order";
+import Grid from "@mui/material/Grid";
 
 //const stripe = require("stripe-client")(STRIPE_KEY_TEST);
 
@@ -102,10 +103,10 @@ const CartPayment = (props) => {
   return (
     <Box
       component="form"
-      sx={{ width: 900 }}
+      sx={{ maxWidth: 950 }}
       // sx={{
-      //   "& .MuiTextField-root": { mb: 1, mr: 1, width: "50ch" },
-      //   "& .MuiButton-root": { width: "79ch" },
+      //   "& .MuiTextField-root": { width: "50ch", mr: 1 },
+      //   "& .MuiButton-root": { width: "56ch" },
       // }}
       noValidate
       autoComplete="on"
@@ -115,80 +116,93 @@ const CartPayment = (props) => {
           Agregar forma de pago
         </Typography>
       </div>
-      <div>
-        <TextField
-          fullWidth
-          required
-          id="outlined-required"
-          label="Nombre de la tarjeta"
-          sx={{ mb: 1, mr: 1, width: "50ch" }}
-          value={formik.values.name}
-          error={formik.errors.name}
-          onChange={(event) => formik.setFieldValue("name", event.target.value)}
-        />
-        <TextField
-          fullWidth
-          required
-          id="outlined-required"
-          label="Numero de la tarjeta"
-          sx={{ width: "50ch" }}
-          value={formik.values.number}
-          error={formik.errors.number}
-          onChange={(event) =>
-            formik.setFieldValue("number", event.target.value)
-          }
-        />
-      </div>
-      <div>
-        <TextField
-          fullWidth
-          required
-          id="outlined-required"
-          label="Mes"
-          sx={{ mb: 1, mr: 1, width: "32.8ch" }}
-          value={formik.values.exp_month}
-          error={formik.errors.exp_month}
-          onChange={(event) =>
-            formik.setFieldValue("exp_month", event.target.value)
-          }
-        />
-        <TextField
-          fullWidth
-          required
-          id="outlined-required"
-          label="Año"
-          sx={{ mb: 1, mr: 1, width: "32.8ch" }}
-          value={formik.values.exp_year}
-          error={formik.errors.exp_year}
-          onChange={(event) =>
-            formik.setFieldValue("exp_year", event.target.value)
-          }
-        />
-        <TextField
-          fullWidth
-          required
-          id="outlined-required"
-          label="CVV/CVC"
-          sx={{ mb: 1, mr: 1, width: "32.8ch" }}
-          value={formik.values.cvc}
-          error={formik.errors.cvc}
-          onChange={(event) => formik.setFieldValue("cvc", event.target.value)}
-        />
-      </div>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            required
+            id="outlined-required"
+            label="Nombre de la tarjeta"
+            value={formik.values.name}
+            error={formik.errors.name}
+            onChange={(event) =>
+              formik.setFieldValue("name", event.target.value)
+            }
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            fullWidth
+            required
+            id="outlined-required"
+            label="Numero de la tarjeta"
+            //sx={{ width: "50ch" }}
 
-      <div>
-        <Button
-          variant="outlined"
-          color="inherit"
-          size="large"
-          fullWidth
-          onClick={() => {
-            formik.handleSubmit();
-          }}
-        >
-          <span>PAGAR {totalPayment && `($${totalPayment})`} </span>
-        </Button>
-      </div>
+            value={formik.values.number}
+            error={formik.errors.number}
+            onChange={(event) =>
+              formik.setFieldValue("number", event.target.value)
+            }
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={3} sx={{ mt: 0.5 }}>
+        <Grid item xs={12} sm={4}>
+          <TextField
+            fullWidth
+            required
+            id="outlined-required"
+            label="Mes"
+            value={formik.values.exp_month}
+            error={formik.errors.exp_month}
+            onChange={(event) =>
+              formik.setFieldValue("exp_month", event.target.value)
+            }
+          />
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <TextField
+            fullWidth
+            required
+            id="outlined-required"
+            label="Año"
+            value={formik.values.exp_year}
+            error={formik.errors.exp_year}
+            onChange={(event) =>
+              formik.setFieldValue("exp_year", event.target.value)
+            }
+          />
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <TextField
+            fullWidth
+            required
+            id="outlined-required"
+            label="CVV/CVC"
+            value={formik.values.cvc}
+            error={formik.errors.cvc}
+            onChange={(event) =>
+              formik.setFieldValue("cvc", event.target.value)
+            }
+          />
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={3} sx={{ mt: 2 }}>
+        <Grid item xs={12} sm={12}>
+          <Button
+            variant="outlined"
+            color="inherit"
+            size="large"
+            fullWidth
+            onClick={() => {
+              formik.handleSubmit();
+            }}
+          >
+            <span>PAGAR {totalPayment && `($${totalPayment})`} </span>
+          </Button>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

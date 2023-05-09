@@ -56,7 +56,7 @@ const AddAddress = () => {
         component="form"
         sx={{
           "& .MuiTextField-root": { mb: 1, mr: 1, width: "35ch" },
-          "& .MuiButton-root": { width: "79ch" },
+          "& .MuiButton-root": { width: "39ch" },
         }}
         noValidate
         autoComplete="on"

@@ -13,6 +13,7 @@ import Link from "next/link";
 import { mountNormalize, calcPrice } from "@/utils/functions";
 import { deleteFavoriteApi } from "@/services/api/favorite";
 import useAuth from "@/hooks/useAuth";
+import ProductPriceList from "../product/ProductPriceList";
 
 const FavoriteItem = (props) => {
   const { favorite, setReloadFavorites } = props;
@@ -47,9 +48,10 @@ const FavoriteItem = (props) => {
             <Typography variant="body2" color="text.secondary" gutterBottom>
               {favorite.attributes.product.data.attributes.description}
             </Typography>
-            <Typography variant="h5" component="div">
-              {price}
-            </Typography>
+            <ProductPriceList
+              price={favorite.attributes.product.data.attributes.price}
+              discount={favorite.attributes.product.data.attributes.discount}
+            />
           </CardContent>
           <CardActions>
             <Grid
