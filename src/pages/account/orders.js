@@ -5,6 +5,7 @@ import OrderList from "@/components/Order/OrderList";
 import useAuth from "@/hooks/useAuth";
 import { getOrdersApi } from "@/services/api/order";
 import { Typography } from "@mui/material";
+import OrderIndicator from "@/components/Order/OrderIndicator";
 
 const Orders = () => {
   const { auth } = useAuth();
@@ -21,7 +22,7 @@ const Orders = () => {
   return (
     <main className={styles.main}>
       <Typography variant="h5" align="left" color="text.secondary" paragraph>
-        Listado de productos comprados
+        Pedidos
       </Typography>
 
       {!orders ? (
@@ -33,10 +34,13 @@ const Orders = () => {
           color="text.secondary"
           paragraph
         >
-          No hay productos en carrito
+          No ha comprado ningun producto...
         </Typography>
       ) : (
-        <OrderList orders={orders} />
+        <>
+          <OrderIndicator orders={orders} />
+          <OrderList orders={orders} />
+        </>
       )}
     </main>
   );

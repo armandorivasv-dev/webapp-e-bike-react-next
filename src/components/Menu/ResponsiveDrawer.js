@@ -66,17 +66,15 @@ function ResponsiveDrawer(props) {
   // };
 
   useEffect(() => {
-    if (reloadBadgeCart) {
-      getProductCart();
+    (async () => {
+      const response = await getProductCartApi();
+      console.log("response", response);
+      setBadgeCart(response.length);
       setReloadBadgeCart(false);
-    }
-  }, [reloadBadgeCart]);
+    })();
+  }, []);
 
-  const getProductCart = async () => {
-    const response = await getProductCartApi();
-    console.log("response", response);
-    setBadgeCart(response.length);
-  };
+  console.log("badgeCart", badgeCart);
 
   console.log("reloadBadgeCart", reloadBadgeCart);
 

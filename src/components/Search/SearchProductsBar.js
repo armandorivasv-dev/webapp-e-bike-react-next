@@ -10,14 +10,12 @@ const SearchProductsBar = (props) => {
   const { currentSearch } = props;
   const [searchQuery, setSearchQuery] = useState(currentSearch || "");
   const [searchHistory, setSearchHistory] = useState(null);
-  console.log("searchQuery", searchQuery);
   const onChangeSearch = (query) => setSearchQuery(query);
 
   const { push } = useRouter();
 
   const onSearch = (reuseSearch) => {
     const isReuse = typeof reuseSearch === "string";
-    console.log("aqui", searchQuery);
     !isReuse && updateSearchApi(searchQuery);
     push({
       pathname: "/search",
@@ -33,8 +31,6 @@ const SearchProductsBar = (props) => {
     })();
   }, [searchQuery]);
 
-  console.log("searchHistory", searchHistory);
-
   return (
     <>
       <Container maxWidth="md" sx={{ mt: 1, mb: 3 }}>
@@ -44,6 +40,7 @@ const SearchProductsBar = (props) => {
           onChange={onChangeSearch}
           onSearch={onSearch}
           options={searchHistory}
+          width="400px"
         />
       </Container>
     </>

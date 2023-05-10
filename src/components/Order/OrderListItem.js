@@ -17,7 +17,6 @@ import moment from "moment";
 
 const OrderListItem = (props) => {
   const { order } = props;
-  console.log("order", order);
   return (
     <>
       <Grid item md={4} sm={6}>

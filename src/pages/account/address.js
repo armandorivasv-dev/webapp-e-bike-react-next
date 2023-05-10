@@ -32,6 +32,16 @@ const Address = () => {
           Mis direcciones
         </Typography>
       </div>
+
+      {!addresses ? (
+        <h3>Leyendo...</h3>
+      ) : addresses.length === 0 ? (
+        <Typography variant="h7" align="left" color="text.secondary" paragraph>
+          No tienes direcciones registradas, crea tu primera dirección...
+        </Typography>
+      ) : (
+        <AddressList addresses={addresses} />
+      )}
       <Box
         sx={{
           "& .MuiButton-root": { width: "39ch", mb: 2 },
@@ -53,16 +63,6 @@ const Address = () => {
           </Button>
         </div>
       </Box>
-
-      {!addresses ? (
-        <h3>Leyendo...</h3>
-      ) : addresses.length === 0 ? (
-        <Typography variant="h7" align="left" color="text.secondary" paragraph>
-          No tienes direcciones registradas, crea tu primera dirección...
-        </Typography>
-      ) : (
-        <AddressList addresses={addresses} />
-      )}
     </main>
   );
 };
