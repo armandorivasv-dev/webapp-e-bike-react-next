@@ -9,14 +9,17 @@ import {
   getTokenApi,
 } from "../services/api/token";
 import jwtDecode from "jwt-decode";
+import ResponsiveDrawer from "@/components/Menu/ResponsiveDrawer";
+import { getProductCartApi } from "@/services/api/cart";
 //import { ThemeProvider } from "@mui/material/styles";
 //import { themeCustom } from "@/theme/theme";
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);
   const getLayout = Component.getLayout || ((page) => page);
+  const [badgeCart, setBadgeCart] = useState(null);
 
-  // console.log("App - auth", auth);
+  console.log("badgeCart", badgeCart);
 
   useEffect(() => {
     (async () => {
@@ -29,6 +32,13 @@ export default function App({ Component, pageProps }) {
       } else {
         setAuth(null);
       }
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const response = await getProductCartApi();
+      setBadgeCart(response.length);
     })();
   }, []);
 
@@ -47,6 +57,14 @@ export default function App({ Component, pageProps }) {
     }
   };
 
+  const badgeData = useMemo(
+    () => badgeCart,
+
+    [badgeCart]
+  );
+
+  console.log("badgeData", badgeData);
+
   const authData = useMemo(
     () => ({
       auth,
@@ -59,10 +77,17 @@ export default function App({ Component, pageProps }) {
   if (auth === undefined) return null;
 
   return (
-    //  <ThemeProvider theme={themeCustom}>
     <AuthContext.Provider value={authData}>
-      {auth ? getLayout(<Component {...pageProps} />) : <Login />}
+      {auth ? (
+        getLayout(
+          <>
+            <Component {...pageProps} />
+            <ResponsiveDrawer badgeData={badgeData} />
+          </>
+        )
+      ) : (
+        <Login />
+      )}
     </AuthContext.Provider>
-    // </ThemeProvider>
   );
 }

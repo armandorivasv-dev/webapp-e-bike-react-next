@@ -41,7 +41,6 @@ const ProductBuy = (props) => {
         variant="outlined"
         color="inherit"
         fullWidth
-        //onClick={formik.handleSubmit}
         onClick={() => {
           handleClickOpen();
         }}

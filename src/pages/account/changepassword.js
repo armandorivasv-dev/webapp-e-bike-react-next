@@ -69,15 +69,15 @@ const ChangePassword = () => {
       <Box
         component="form"
         sx={{
-          "& .MuiTextField-root": { mb: 1, mr: 1, width: "35ch" },
-          "& .MuiButton-root": { width: "39ch" },
+          "& .MuiTextField-root": { mb: 1, mr: 1, width: "39ch" },
+          "& .MuiButton-root": { width: "43ch", height: "55px" },
         }}
         noValidate
         autoComplete="on"
       >
         <div>
           <Typography
-            variant="h6"
+            variant="h5"
             align="left"
             color="text.secondary"
             paragraph
@@ -112,13 +112,10 @@ const ChangePassword = () => {
               formik.setFieldValue("repeatPassword", event.target.value)
             }
           />
-        </div>
-        <div>
           <Button
             variant="outlined"
             color="inherit"
-            size="large"
-            fullWidth
+            sx={{ height: "55px" }}
             //onClick={formik.handleSubmit}
             onClick={() => {
               handleClickOpen();

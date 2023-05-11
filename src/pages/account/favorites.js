@@ -22,7 +22,7 @@ const Favorites = () => {
   return (
     <main className={styles.main}>
       <Typography variant="h5" align="left" color="text.secondary" paragraph>
-        Listado de favoritos
+        Favoritos
       </Typography>
       {!favorites ? (
         <h1>Cargando</h1>

@@ -61,14 +61,7 @@ const FavoriteItem = (props) => {
               alignItems="center"
             >
               <Link href={`/product/${favorite.attributes.product.data.id}`}>
-                <Button
-                  size="small"
-                  variant="outlined"
-                  color="inherit"
-                  // onClick={() => {
-                  //   goToProduct(product.id);
-                  // }}
-                >
+                <Button size="small" variant="outlined" color="inherit">
                   Ver producto
                 </Button>
               </Link>

@@ -34,7 +34,9 @@ const Address = () => {
       </div>
 
       {!addresses ? (
-        <h3>Leyendo...</h3>
+        <Typography variant="h7" align="left" color="text.secondary" paragraph>
+          Cargando direcciones...
+        </Typography>
       ) : addresses.length === 0 ? (
         <Typography variant="h7" align="left" color="text.secondary" paragraph>
           No tienes direcciones registradas, crea tu primera dirección...

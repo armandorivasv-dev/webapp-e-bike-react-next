@@ -103,7 +103,7 @@ const CartPayment = (props) => {
   return (
     <Box
       component="form"
-      sx={{ maxWidth: 950 }}
+      //sx={{ maxWidth: 950 }}
       // sx={{
       //   "& .MuiTextField-root": { width: "50ch", mr: 1 },
       //   "& .MuiButton-root": { width: "56ch" },
@@ -112,8 +112,17 @@ const CartPayment = (props) => {
       autoComplete="on"
     >
       <div>
-        <Typography variant="h6" align="left" color="text.secondary" paragraph>
+        {/* <Typography variant="h6" align="left" color="text.secondary" paragraph>
           Agregar forma de pago
+        </Typography> */}
+        <Typography
+          variant="h6"
+          align="left"
+          color="text.secondary"
+          paragraph
+          sx={{ mt: 4 }}
+        >
+          Agregue forma de pago
         </Typography>
       </div>
       <Grid container spacing={3}>
@@ -124,7 +133,7 @@ const CartPayment = (props) => {
             id="outlined-required"
             label="Nombre de la tarjeta"
             value={formik.values.name}
-            error={formik.errors.name}
+            error={!!formik.errors.name}
             onChange={(event) =>
               formik.setFieldValue("name", event.target.value)
             }
@@ -139,7 +148,7 @@ const CartPayment = (props) => {
             //sx={{ width: "50ch" }}
 
             value={formik.values.number}
-            error={formik.errors.number}
+            error={!!formik.errors.number}
             onChange={(event) =>
               formik.setFieldValue("number", event.target.value)
             }
@@ -154,7 +163,7 @@ const CartPayment = (props) => {
             id="outlined-required"
             label="Mes"
             value={formik.values.exp_month}
-            error={formik.errors.exp_month}
+            error={!!formik.errors.exp_month}
             onChange={(event) =>
               formik.setFieldValue("exp_month", event.target.value)
             }
@@ -167,7 +176,7 @@ const CartPayment = (props) => {
             id="outlined-required"
             label="Año"
             value={formik.values.exp_year}
-            error={formik.errors.exp_year}
+            error={!!formik.errors.exp_year}
             onChange={(event) =>
               formik.setFieldValue("exp_year", event.target.value)
             }
@@ -180,7 +189,7 @@ const CartPayment = (props) => {
             id="outlined-required"
             label="CVV/CVC"
             value={formik.values.cvc}
-            error={formik.errors.cvc}
+            error={!!formik.errors.cvc}
             onChange={(event) =>
               formik.setFieldValue("cvc", event.target.value)
             }

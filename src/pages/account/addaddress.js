@@ -21,7 +21,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 const AddAddress = () => {
   const { auth } = useAuth();
 
-  const { push } = useRouter();
+  const { push, back } = useRouter();
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -50,20 +50,24 @@ const AddAddress = () => {
   };
   //dialog
 
+  const handleBack = () => {
+    back();
+  };
+
   return (
     <main className={styles.main}>
       <Box
         component="form"
         sx={{
-          "& .MuiTextField-root": { mb: 1, mr: 1, width: "35ch" },
-          "& .MuiButton-root": { width: "39ch" },
+          "& .MuiTextField-root": { mb: 2, mr: 2, width: "39ch" },
+          "& .MuiButton-root": { width: "43ch", height: "55px", mr: 2 },
         }}
         noValidate
         autoComplete="on"
       >
         <div>
           <Typography
-            variant="h6"
+            variant="h5"
             align="left"
             color="text.secondary"
             paragraph
@@ -94,8 +98,6 @@ const AddAddress = () => {
               formik.setFieldValue("name_lastname", event.target.value)
             }
           />
-        </div>
-        <div>
           <TextField
             fullWidth
             required
@@ -118,8 +120,6 @@ const AddAddress = () => {
               formik.setFieldValue("postal_code", event.target.value)
             }
           />
-        </div>
-        <div>
           <TextField
             fullWidth
             required
@@ -142,8 +142,6 @@ const AddAddress = () => {
               formik.setFieldValue("state", event.target.value)
             }
           />
-        </div>
-        <div>
           <TextField
             fullWidth
             required
@@ -178,6 +176,17 @@ const AddAddress = () => {
             }}
           >
             <span>AGREGAR DIRECCIÓN</span>
+          </Button>
+          <Button
+            variant="outlined"
+            color="inherit"
+            size="large"
+            fullWidth
+            onClick={() => {
+              handleBack();
+            }}
+          >
+            <span>CANCELAR</span>
           </Button>
         </div>
       </Box>

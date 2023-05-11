@@ -58,19 +58,21 @@ const AddressList = (props) => {
   return (
     <>
       {addresses.map((address) => (
-        <Card key={address.id} sx={{ maxWidth: "71ch", mb: 1 }}>
+        <Card key={address.id} sx={{ mb: 1 }}>
           <CardContent>
             <Typography variant="h5" component="h1" gutterBottom>
               {address.attributes.title}
             </Typography>
 
             <Typography variant="body1" color="text.secondary" component="h1">
-              {address.attributes.name_lastname}
+              {address.attributes.name_lastname}, {address.attributes.address}
             </Typography>
 
-            <Typography variant="body1" color="text.secondary" component="h1">
-              {address.attributes.address}
-            </Typography>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              component="h1"
+            ></Typography>
 
             <Typography variant="body1" color="text.secondary" component="h1">
               {address.attributes.state}, {address.attributes.city},{" "}

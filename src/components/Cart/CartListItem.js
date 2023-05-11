@@ -42,7 +42,7 @@ const CartListItem = (props) => {
       {!product ? (
         <h1>Cargando...</h1>
       ) : (
-        <Card sx={{ display: "flex", maxWidth: 950, direction: "row", mt: 4 }}>
+        <Card sx={{ display: "flex", direction: "row", mt: 4 }}>
           <Grid
             container
             direction="row"

@@ -31,7 +31,7 @@ export const DashboardLayout = (props) => {
           {children}
         </Box>
       </DashboardLayoutRoot>
-      <ResponsiveDrawer />
+      {/* <ResponsiveDrawer /> */}
     </>
   );
 };

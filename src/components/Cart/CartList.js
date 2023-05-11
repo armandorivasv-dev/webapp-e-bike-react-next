@@ -41,7 +41,7 @@ const CartList = (props) => {
             color="text.secondary"
             paragraph
           >
-            Productos en el carrito:
+            Productos en el carrito
           </Typography>
           {products.map((product) => (
             <CartListItem

@@ -33,7 +33,7 @@ const SearchProductsBar = (props) => {
 
   return (
     <>
-      <Container maxWidth="md" sx={{ mt: 1, mb: 3 }}>
+      <Container maxWidth="md" sx={{ mt: 1, mb: 2 }}>
         <SearchBar
           placeholder="Busca un producto aqui..."
           value={searchQuery}

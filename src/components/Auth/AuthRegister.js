@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import logo from "../../../public/assets/logo.png";
 import Image from "next/image";
+import toast, { Toaster } from "react-hot-toast";
 
 const AuthRegister = (props) => {
   const { changeForm } = props;
@@ -22,27 +23,15 @@ const AuthRegister = (props) => {
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (formData) => {
       console.log("AuthRegister - formData--->", formData);
+
       try {
         const response = await registerApi(formData);
-        console.log("AuthRegister - response--->", response);
+        if (response.error) throw "Email o username ya existe!!!";
       } catch (error) {
-        setMessage(error);
-        console.log(error);
+        await toast(error);
       }
     },
   });
-
-  // const handleSubmit = async (formData) => {
-  //   formData.preventDefault();
-  //   const data = new FormData(formData.currentTarget);
-  //   console.log("authlogin.js data", data);
-  //   try {
-  //     const response = await loginApi(data);
-  //     console.log("response--->", response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <Container maxWidth="xs" sx={{ mt: 5, backgroundColor: "#fff" }}>
@@ -187,6 +176,7 @@ const AuthRegister = (props) => {
           </Box>
         </Box>
       </Box>
+      <Toaster position="top-center" duration="4000" />
     </Container>
   );
 };

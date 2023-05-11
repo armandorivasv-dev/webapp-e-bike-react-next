@@ -19,7 +19,7 @@ const ProductCarousel = () => {
 
   return (
     <>
-      <Grid container sx={{ maxWidth: 1480 }}>
+      <Grid container sx={{ maxWidth: 1490 }}>
         {!images ? (
           <h1>Cargando...</h1>
         ) : (

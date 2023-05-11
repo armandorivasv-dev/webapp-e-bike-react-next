@@ -18,11 +18,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Grid from "@mui/material/Grid";
+import { useRouter } from "next/router";
 
 const CartAddressList = (props) => {
   const { addresses, selectedAddress, setSelectedAddress } = props;
 
-  const [value, setValue] = useState(addresses[0].id);
+  const [value, setValue] = useState("");
+
+  const { push } = useRouter();
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -47,7 +50,7 @@ const CartAddressList = (props) => {
         paragraph
         sx={{ mt: 4 }}
       >
-        Seleccione una dirección:
+        Seleccione una dirección
       </Typography>
 
       <FormControl>
@@ -57,70 +60,103 @@ const CartAddressList = (props) => {
           value={value}
           onChange={handleChange}
         >
-          {addresses.map((address) => (
-            <Card
-              key={address.id}
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                maxWidth: 950,
-                mb: 2,
-              }}
+          {!addresses ? (
+            <Typography
+              variant="h7"
+              align="center"
+              color="text.secondary"
+              paragraph
             >
-              <CardContent>
-                <Typography variant="h5" component="h1" gutterBottom>
-                  {address.attributes.title}
-                </Typography>
+              Cargando direcciones...
+            </Typography>
+          ) : addresses.length === 0 ? (
+            <>
+              <Typography
+                variant="h7"
+                align="center"
+                color="text.secondary"
+                paragraph
+              >
+                No tienes direcciones registradas, crea tu primera dirección...
+              </Typography>
+              <Button
+                variant="outlined"
+                color="inherit"
+                size="large"
+                fullWidth
+                onClick={() => {
+                  push("/account/addaddress");
+                }}
+              >
+                <span>AGREGAR UNA DIRECCION</span>
+              </Button>
+            </>
+          ) : (
+            <>
+              {addresses.map((address) => (
+                <Card
+                  key={address.id}
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    mb: 2,
+                  }}
+                >
+                  <CardContent>
+                    <Typography variant="h5" component="h1" gutterBottom>
+                      {address.attributes.title}
+                    </Typography>
 
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  component="h1"
-                >
-                  {address.attributes.name_lastname}
-                </Typography>
+                    <Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="h1"
+                    >
+                      {address.attributes.name_lastname}
+                    </Typography>
 
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  component="h1"
-                >
-                  {address.attributes.address}
-                </Typography>
+                    <Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="h1"
+                    >
+                      {address.attributes.address}
+                    </Typography>
 
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  component="h1"
-                >
-                  {address.attributes.state}, {address.attributes.city},{" "}
-                  {address.attributes.postal_code}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  component="h1"
-                >
-                  Teléfono: {address.attributes.phone}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Grid
-                  container
-                  direction="colunm"
-                  justifyContent="center"
-                  alignItems="center"
-                  width="50px"
-                >
-                  <FormControlLabel
-                    value={address.id}
-                    control={<Radio />}
-                    // label={address.attributes.title}
-                  />
-                </Grid>
-              </CardActions>
-            </Card>
-          ))}
+                    <Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="h1"
+                    >
+                      {address.attributes.state}, {address.attributes.city},{" "}
+                      {address.attributes.postal_code}
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      color="text.secondary"
+                      component="h1"
+                    >
+                      Teléfono: {address.attributes.phone}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Grid
+                      container
+                      direction="colunm"
+                      justifyContent="center"
+                      alignItems="center"
+                      width="50px"
+                    >
+                      <FormControlLabel
+                        value={address.id}
+                        control={<Radio />}
+                      />
+                    </Grid>
+                  </CardActions>
+                </Card>
+              ))}
+            </>
+          )}
         </RadioGroup>
       </FormControl>
     </>

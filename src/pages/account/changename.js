@@ -72,15 +72,16 @@ const ChangeName = () => {
       <Box
         component="form"
         sx={{
-          "& .MuiTextField-root": { mb: 1, mr: 1, width: "35ch" },
-          "& .MuiButton-root": { width: "39ch" },
+          "& .MuiTextField-root": { mb: 1, mr: 1, width: "39ch" },
+          "& .MuiButton-root": { width: "43ch", height: "55px" },
         }}
         noValidate
         autoComplete="on"
       >
         <div>
           <Typography
-            variant="h6"
+            Typography
+            variant="h5"
             align="left"
             color="text.secondary"
             paragraph
@@ -111,13 +112,9 @@ const ChangeName = () => {
               formik.setFieldValue("lastname", event.target.value)
             }
           />
-        </div>
-        <div>
           <Button
             variant="outlined"
             color="inherit"
-            size="large"
-            //fullWidth
             onClick={() => {
               handleClickOpen();
             }}
@@ -125,6 +122,7 @@ const ChangeName = () => {
             <span>CAMBIAR NOMBRES Y APELLIDOS</span>
           </Button>
         </div>
+        <div></div>
       </Box>
       <Toaster position="top-center" duration="4000" />
 

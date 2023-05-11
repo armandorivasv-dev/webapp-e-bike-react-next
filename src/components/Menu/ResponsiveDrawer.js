@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -37,46 +37,54 @@ import { grey } from "@mui/material/colors";
 import Grid from "@mui/material/Grid";
 import Badge from "@mui/material/Badge";
 import { getProductCartApi } from "@/services/api/cart";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import { CART, SEARCH_HISTORY } from "@/utils/constants";
 
 const colorAppBar = grey[500];
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
-  const { window } = props;
+  const { window, badgeData } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [badgeCart, setBadgeCart] = useState(null);
-  const [reloadBadgeCart, setReloadBadgeCart] = useState(true);
-  const [badgeFavorite, setBadgeFavorite] = useState(null);
+  // const [notifications, setNotifications] = useState(null);
+  // const [badgeCart, setBadgeCart] = useState(null);
 
   const { logout } = useAuth();
 
-  // const router = useRouter();
-
   // useEffect(() => {
-  //   if (reloadCart) {
-  //     getProductCart();
-  //     setReloadCart(false);
-  //   }
-  // }, [reloadCart]);
+  //   (async () => {
+  //     const response = await getProductCartApi();
+  //     setBadgeCart(response.length);
+  //   })();
+  // }, []);
 
-  // const getProductCart = async () => {
-  //   const response = await getProductCartApi();
-  //   setCart(response);
-  // };
+  console.log("badgeData", badgeData);
 
-  useEffect(() => {
-    (async () => {
-      const response = await getProductCartApi();
-      console.log("response", response);
-      setBadgeCart(response.length);
-      setReloadBadgeCart(false);
-    })();
-  }, []);
+  // const unread = useMemo(() => {
+  //   return badgeCart;
+  // }, [badgeCart]);
 
-  console.log("badgeCart", badgeCart);
+  //dialog
+  const [open, setOpen] = useState(false);
 
-  console.log("reloadBadgeCart", reloadBadgeCart);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOk = () => {
+    localStorage.clear(CART);
+    localStorage.clear(SEARCH_HISTORY);
+    logout();
+  };
+  //dialog
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -106,7 +114,7 @@ function ResponsiveDrawer(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Badge badgeContent={badgeCart} color="primary">
+                <Badge badgeContent={badgeData} color="primary">
                   <ShoppingCartIcon />
                 </Badge>
               </ListItemIcon>
@@ -129,7 +137,7 @@ function ResponsiveDrawer(props) {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Badge badgeContent={4} color="primary">
+                <Badge color="primary">
                   <FavoriteIcon />
                 </Badge>
               </ListItemIcon>
@@ -228,7 +236,7 @@ function ResponsiveDrawer(props) {
         <ListItem disablePadding>
           <ListItemButton
             onClick={() => {
-              logout();
+              handleClickOpen();
             }}
           >
             <ListItemIcon>
@@ -330,6 +338,24 @@ function ResponsiveDrawer(props) {
       >
         <Toolbar />
       </Box>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Esta seguro que cerrar sessión?"}
+        </DialogTitle>
+
+        <DialogActions>
+          <Button onClick={handleClose}>Cancelar</Button>
+          <Button onClick={handleOk} autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
