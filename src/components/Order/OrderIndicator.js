@@ -3,17 +3,14 @@ import Grid from "@mui/material/Grid";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
-import PercentIcon from "@mui/icons-material/Percent";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { mountNormalize } from "@/utils/functions";
 
 const iconStyle = {
   fontSize: 60,
-  color: "#9e9e9e",
+  color: "#1565C0",
 };
 
 const OrderIndicator = (props) => {
@@ -23,11 +20,6 @@ const OrderIndicator = (props) => {
   const [totalOrders, setTotalOrders] = useState(0);
   const [maxProduct, setMaxProduct] = useState("");
   const [maxProductCant, setMaxProductCant] = useState(0);
-  // console.log("orders", orders);
-  // console.log("totalProducts", totalProducts);
-  // console.log("totalOrders", totalOrders);
-  // console.log("maxProduct", maxProduct);
-  // console.log("maxProductCant", maxProductCant);
 
   useEffect(() => {
     let totalProducts = 0;
@@ -41,19 +33,8 @@ const OrderIndicator = (props) => {
   }, []);
 
   useEffect(() => {
-    // console.log("orders in orderindicartors", orders);
     try {
       const groupedProducts = orders.reduce((acc, curr) => {
-        // console.log("acc", acc);
-        // console.log(
-        //   "!acc[curr.attributes.product.data.attributes.title]",
-        //   !acc[curr.attributes.product.data.attributes.title]
-        // );
-        // console.log(
-        //   "acc[curr.attributes.product.data.attributes.title]",
-        //   acc[curr.attributes.product.data.attributes.title]
-        // );
-        // console.log("curr", curr);
         if (!acc[curr.attributes.product.data.attributes.title]) {
           acc[curr.attributes.product.data.attributes.title] = 0;
         }
@@ -61,7 +42,6 @@ const OrderIndicator = (props) => {
           curr.attributes.product_quantity;
         return acc;
       }, {});
-      //console.log("groupedProducts", groupedProducts);
 
       let maxProduct = "";
       let maxProductCant = -1;
@@ -74,9 +54,7 @@ const OrderIndicator = (props) => {
       }
       setMaxProduct(maxProduct);
       setMaxProductCant(maxProductCant);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }, []);
 
   return (
@@ -87,22 +65,22 @@ const OrderIndicator = (props) => {
 
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ maxWidth: 400, bgcolor: "#e0e0e0" }}>
+          <Card sx={{ maxWidth: 400, bgcolor: "#e3f2fd" }}>
             <CardContent>
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs={2}>
                   <ShoppingCartCheckoutIcon sx={iconStyle} />
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography sx={{ fontSize: 18 }} align="right">
+                  <Typography sx={{ fontSize: 22 }} align="right">
                     Productos comprados
                   </Typography>
-                  <Typography sx={{ fontSize: 12 }} align="right">
+                  <Typography sx={{ fontSize: 16 }} align="right">
                     Total
                   </Typography>
 
                   <Typography
-                    sx={{ fontSize: 30 }}
+                    sx={{ fontSize: 32 }}
                     align="right"
                     color="primary"
                   >
@@ -122,22 +100,22 @@ const OrderIndicator = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ maxWidth: 400, bgcolor: "#e0e0e0" }}>
+          <Card sx={{ maxWidth: 400, bgcolor: "#e3f2fd" }}>
             <CardContent>
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs={2}>
                   <AddShoppingCartIcon sx={iconStyle} />
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography sx={{ fontSize: 18 }} align="right">
+                  <Typography sx={{ fontSize: 22 }} align="right">
                     Producto más comprado
                   </Typography>
-                  <Typography sx={{ fontSize: 12 }} align="right">
+                  <Typography sx={{ fontSize: 16 }} align="right">
                     {maxProduct}
                   </Typography>
 
                   <Typography
-                    sx={{ fontSize: 30 }}
+                    sx={{ fontSize: 32 }}
                     align="right"
                     color="primary"
                   >
@@ -157,25 +135,25 @@ const OrderIndicator = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={6} md={4}>
-          <Card sx={{ maxWidth: 400, bgcolor: "#e0e0e0" }}>
+          <Card sx={{ maxWidth: 400, bgcolor: "#e3f2fd" }}>
             <CardContent>
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs={2}>
                   <AttachMoneyIcon sx={iconStyle} />
                 </Grid>
                 <Grid item xs={10}>
-                  <Typography sx={{ fontSize: 18 }} align="right">
+                  <Typography sx={{ fontSize: 22 }} align="right">
                     Total pedidos
                   </Typography>
-                  <Typography sx={{ fontSize: 12 }} align="right">
+                  <Typography sx={{ fontSize: 16 }} align="right">
                     Monto
                   </Typography>
                   <Typography
-                    sx={{ fontSize: 30 }}
+                    sx={{ fontSize: 32 }}
                     align="right"
                     color="primary"
                   >
-                    ${totalOrders}
+                    ${mountNormalize(totalOrders)}
                   </Typography>
                 </Grid>
               </Grid>

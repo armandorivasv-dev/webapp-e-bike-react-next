@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Account.module.css";
 import { DashboardLayout } from "./dashboard-layout";
 import SearchProductList from "../components/Search/SearchProductList";
 import SearchProductsBar from "../components/Search/SearchProductsBar";
 import { useRouter } from "next/router";
 import { searchProductApi } from "@/services/api/search";
 import { Typography } from "@mui/material";
+import Loading from "@/components/Loading/Loading";
 
 const SearchProduct = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const SearchProduct = () => {
     <main className={styles.main}>
       <SearchProductsBar currentSearch={search} />
       {!products ? (
-        <h1>Cargando productos...</h1>
+        <Loading text={"Cargando productos..."} />
       ) : products.length === 0 ? (
         <Typography
           variant="h6"

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -10,8 +9,6 @@ import useAuth from "@/hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useRouter } from "next/router";
 
@@ -19,8 +16,6 @@ const AddressList = (props) => {
   const { addresses } = props;
 
   const [idAdd, setIdAdd] = useState(null);
-
-  console.log("idAdd", idAdd);
 
   const { auth } = useAuth();
 
@@ -33,7 +28,6 @@ const AddressList = (props) => {
   const deleteAddress = async (idAddress) => {
     try {
       await deleteAddressApi(auth, idAddress);
-      // setReloadAdress(true);
       await notifyOk();
       router.reload();
     } catch (error) {
@@ -58,7 +52,7 @@ const AddressList = (props) => {
   return (
     <>
       {addresses.map((address) => (
-        <Card key={address.id} sx={{ mb: 1 }}>
+        <Card key={address.id} sx={{ mb: 1, bgcolor: "#e3f2fd" }}>
           <CardContent>
             <Typography variant="h5" component="h1" gutterBottom>
               {address.attributes.title}
@@ -83,7 +77,6 @@ const AddressList = (props) => {
             </Typography>
           </CardContent>
           <CardActions>
-            {/* <Button size="small">Editar</Button> */}
             <Button
               size="small"
               variant="outlined"

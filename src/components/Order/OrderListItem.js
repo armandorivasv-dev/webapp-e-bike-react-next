@@ -55,7 +55,7 @@ const OrderListItem = (props) => {
               <Button
                 size="small"
                 variant="outlined"
-                color="inherit"
+                color="primary"
                 // onClick={() => {
                 //   goToProduct(product.id);
                 // }}

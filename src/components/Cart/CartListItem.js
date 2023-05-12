@@ -18,6 +18,7 @@ import {
   increaseProductCartApi,
   decreaseProductCartApi,
 } from "@/services/api/cart";
+import Loading from "../Loading/Loading";
 
 const CartListItem = (props) => {
   const { product, setReloadCart } = props;
@@ -40,19 +41,19 @@ const CartListItem = (props) => {
   return (
     <>
       {!product ? (
-        <h1>Cargando...</h1>
+        <Loading text={"Cargando productos..."} />
       ) : (
         <Card sx={{ display: "flex", direction: "row", mt: 4 }}>
           <Grid
             container
             direction="row"
-            justifyContent="flex-start"
+            style={{ justifyContent: "flex-start" }}
             alignItems="flex-start"
           >
             <Image
-              width="180"
-              height="230"
-              alt={product.data.attributes.description}
+              width="200"
+              height="250"
+              alt={product.data.attributes.title}
               src={`${API_URL}${product.data.attributes.main_image.data.attributes.url}`}
             />
             <CardContent>
@@ -60,7 +61,7 @@ const CartListItem = (props) => {
                 {product.data.attributes.title}
               </Typography>
               <Typography variant="body2" color="text.secondary" gutterBottom>
-                {product.data.attributes.description}
+                Tipo: {product.data.attributes.category}
               </Typography>
               <Typography variant="h5" gutterBottom>
                 $
@@ -77,7 +78,7 @@ const CartListItem = (props) => {
             <Grid
               container
               direction="row"
-              justifyContent="flex-end"
+              style={{ justifyContent: "flex-end" }}
               alignItems="center"
               width="200px"
             >

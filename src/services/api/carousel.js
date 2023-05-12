@@ -11,7 +11,6 @@ export const getCarouselApi = async () => {
     };
     const response = await fetch(url, params);
     const result = await response.json();
-    console.log("result", result);
     return result;
   } catch (error) {
     console.log(error);

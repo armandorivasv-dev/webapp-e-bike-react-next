@@ -8,14 +8,6 @@ const ProductQuantity = (props) => {
   const [value, setValue] = useState(options[0]);
   const [inputValue, setInputValue] = useState("");
 
-  console.log("quantity", quantity);
-
-  // const [items, setItems] = useState([
-  //   { label: "1", value: 1 },
-  //   { label: "2", value: 2 },
-  //   { label: "3", value: 3 },
-  // ]);
-
   return (
     <>
       <Autocomplete

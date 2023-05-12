@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, TextField, InputAdornment } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { Container } from "@mui/material";
 import SearchBar from "@mkyy/mui-search-bar";
 import { useRouter } from "next/router";
 import { getSearchApi, updateSearchApi } from "@/services/api/search";
-import { SEARCH_HISTORY, TOKEN } from "@/utils/constants";
+import { SEARCH_HISTORY } from "@/utils/constants";
 
 const SearchProductsBar = (props) => {
   const { currentSearch } = props;

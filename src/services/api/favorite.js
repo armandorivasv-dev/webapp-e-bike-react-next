@@ -45,9 +45,7 @@ export const addFavoriteApi = async (auth, idProduct) => {
 
 export const deleteFavoriteApi = async (auth, idProduct) => {
   const dataFound = await isFavoriteApi(auth, idProduct);
-  //console.log("dataFound", JSON.stringify(dataFound.data, null, 4));
   if (dataFound.data.length > 0) {
-    // console.log("paso por aca");
     try {
       const url = `${API_URL}/api/favorites/${dataFound.data[0].id}`;
       const params = {
@@ -70,7 +68,7 @@ export const deleteFavoriteApi = async (auth, idProduct) => {
 
 export const getFavoriteApi = async (auth) => {
   try {
-    const url = `${API_URL}/api/favorites?populate[product][populate]=main_image`;
+    const url = `${API_URL}/api/favorites/?filters[user]=${auth.idUser}&populate[product][populate]=main_image`;
     const params = {
       method: "GET",
       headers: {
@@ -80,7 +78,6 @@ export const getFavoriteApi = async (auth) => {
     };
     const response = await fetch(url, params);
     const result = await response.json();
-    console.log("result", result);
     return result;
   } catch (error) {
     console.log(error);

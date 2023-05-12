@@ -19,7 +19,6 @@ const FavoriteItem = (props) => {
   const { favorite, setReloadFavorites } = props;
 
   const { auth } = useAuth();
-  console.log("favorite", favorite);
 
   const price = calcPrice(
     favorite.attributes.product.data.attributes.price,
@@ -61,14 +60,14 @@ const FavoriteItem = (props) => {
               alignItems="center"
             >
               <Link href={`/product/${favorite.attributes.product.data.id}`}>
-                <Button size="small" variant="outlined" color="inherit">
+                <Button size="small" variant="outlined" color="primary">
                   Ver producto
                 </Button>
               </Link>
               <Button
                 size="small"
                 variant="outlined"
-                color="inherit"
+                color="primary"
                 onClick={() => {
                   deleteFavorite(favorite.attributes.product.data.id);
                 }}

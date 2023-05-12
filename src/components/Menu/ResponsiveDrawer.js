@@ -4,46 +4,23 @@ import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import KeyIcon from "@mui/icons-material/Key";
-import MapIcon from "@mui/icons-material/Map";
-import ListAltIcon from "@mui/icons-material/ListAlt";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { routes } from "../../utils/routes";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
-import HomeIcon from "@mui/icons-material/Home";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import logo from "../../../public/assets/logo.png";
 import Image from "next/image";
 import { grey } from "@mui/material/colors";
 import Grid from "@mui/material/Grid";
-import Badge from "@mui/material/Badge";
-import { getProductCartApi } from "@/services/api/cart";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
 import { CART, SEARCH_HISTORY } from "@/utils/constants";
+import { getUserApi } from "@/services/api/auth";
+import UserInfo from "../Account/UserInfo";
+import { ResponsiveDrawerOptins } from "./ResponsiveDrawerOptions";
 
 const colorAppBar = grey[500];
 
@@ -52,23 +29,15 @@ const drawerWidth = 240;
 function ResponsiveDrawer(props) {
   const { window, badgeData } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
-  // const [notifications, setNotifications] = useState(null);
-  // const [badgeCart, setBadgeCart] = useState(null);
+  const [user, setUser] = useState(null);
+  const { logout, auth } = useAuth();
 
-  const { logout } = useAuth();
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await getProductCartApi();
-  //     setBadgeCart(response.length);
-  //   })();
-  // }, []);
-
-  console.log("badgeData", badgeData);
-
-  // const unread = useMemo(() => {
-  //   return badgeCart;
-  // }, [badgeCart]);
+  useEffect(() => {
+    (async () => {
+      const response = await getUserApi(auth.token);
+      setUser(response);
+    })();
+  }, []);
 
   //dialog
   const [open, setOpen] = useState(false);
@@ -89,165 +58,6 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-
-      <List>
-        <Link href="/">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-      </List>
-      <Divider />
-
-      <List>
-        <Link href="/cart">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Badge badgeContent={badgeData} color="primary">
-                  <ShoppingCartIcon />
-                </Badge>
-              </ListItemIcon>
-
-              <ListItemText primary="Carrito" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Link href="/account/orders">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <ListAltIcon />
-              </ListItemIcon>
-              <ListItemText primary="Pedidos" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Link href="/account/favorites">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Badge color="primary">
-                  <FavoriteIcon />
-                </Badge>
-              </ListItemIcon>
-              <ListItemText primary="Favoritos" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-      </List>
-      {/* <List>
-        {["Pedidos", "Lista favoritos", "Cerrar sessión"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List> */}
-
-      <Divider />
-      <List>
-        <Link href="/account/changename">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PersonOutlineIcon />
-              </ListItemIcon>
-              <ListItemText primary="Cambiar nombre" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Link href="/account/changemail">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <AlternateEmailIcon />
-              </ListItemIcon>
-              <ListItemText primary="Cambiar email" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Link href="/account/changeusername">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PersonAddAltIcon />
-              </ListItemIcon>
-              <ListItemText primary="Cambiar username" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Link href="/account/changepassword">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <KeyIcon />
-              </ListItemIcon>
-              <ListItemText primary="Cambiar contraseña" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-        <Link href="/account/address">
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <MapIcon />
-              </ListItemIcon>
-              <ListItemText primary="Mis direcciones" />
-            </ListItemButton>
-          </ListItem>
-        </Link>
-      </List>
-      <Divider />
-      {/* <List>
-        {[
-          "Cambiar nombre",
-          "Cambiar email",
-          "Cambiar username",
-          "Cambiar contraseña",
-          "Mis direcciones",
-        ].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-
-      </List> */}
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => {
-              handleClickOpen();
-            }}
-          >
-            <ListItemIcon>
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary="Cerrar sessión" />
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </div>
-  );
 
   const container =
     window !== undefined ? () => window().document.body : undefined;
@@ -274,9 +84,8 @@ function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div" color="#ffffff">
-            Tienda especializada en MountainBike
-          </Typography>
+          TIENDA ESPECIALIZADA EN MOUNTAINBIKE
+          {/* {!user ? <h6>Cargando...</h6> : <UserInfo user={user} />} */}
         </Toolbar>
       </AppBar>
       <Box
@@ -284,8 +93,6 @@ function ResponsiveDrawer(props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-
         <Drawer
           container={container}
           variant="temporary"
@@ -302,7 +109,16 @@ function ResponsiveDrawer(props) {
             },
           }}
         >
-          {drawer}
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-around"
+            alignItems="center"
+            sx={{ height: 5 }}
+          >
+            <Image width="60" height="60" alt="Images" src={logo} />
+          </Grid>
+          <ResponsiveDrawerOptins />
         </Drawer>
 
         <Drawer
@@ -325,7 +141,7 @@ function ResponsiveDrawer(props) {
           >
             <Image width="70" height="70" alt="Images" src={logo} />
           </Grid>
-          {drawer}
+          <ResponsiveDrawerOptins />
         </Drawer>
       </Box>
       <Box

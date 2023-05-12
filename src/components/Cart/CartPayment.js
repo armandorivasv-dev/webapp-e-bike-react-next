@@ -34,10 +34,6 @@ const CartPayment = (props) => {
 
   const { push } = useRouter();
 
-  // console.log("auth", auth);
-  // console.log("products", products);
-  // console.log("selectedAddress", selectedAddress);
-
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
@@ -61,60 +57,12 @@ const CartPayment = (props) => {
       } catch (error) {
         console.log(error);
       }
-
-      // //const result = await stripe.createToken({ card: FormData });
-      // // console.log("result", result);
-      // // console.log("FormData", FormData);
-      // //console.log("result", JSON.stringify(result, null, 4));
-      // if (result?.error) {
-      //   setLoading(false);
-      //   // Toast.show(result.error.message, {
-      //   //   position: Toast.positions.CENTER,
-      //   // });
-      //   console.log("result.error.message", result.error.message);
-      // } else {
-      //   const response = await addOrderApi(
-      //     auth,
-      //     Math.random(26),
-      //     products,
-      //     selectedAddress
-      //   );
-      //   console.log("response", response);
-      //   if (response.length > 0) {
-      //     //await deleteCartApi();
-      //     console.log("Eliminar carrito");
-      //     //navigation.navigate("account-stack", { screen: "orders" });
-      //   } else {
-      //     // Toast.show("Error al realizar el pago", {
-      //     //   position: Toast.positions.CENTER,
-      //     // });
-      //     console.log("Error al realizar el pago");
-      //     setLoading(false);
-      //   }
-
-      //console.log("response", JSON.stringify(response, null, 4));
-      // Toast.show("Pago exitoso", {
-      //   position: Toast.positions.CENTER,
-      // });
-      //}
     },
   });
 
   return (
-    <Box
-      component="form"
-      //sx={{ maxWidth: 950 }}
-      // sx={{
-      //   "& .MuiTextField-root": { width: "50ch", mr: 1 },
-      //   "& .MuiButton-root": { width: "56ch" },
-      // }}
-      noValidate
-      autoComplete="on"
-    >
+    <Box component="form" noValidate autoComplete="on">
       <div>
-        {/* <Typography variant="h6" align="left" color="text.secondary" paragraph>
-          Agregar forma de pago
-        </Typography> */}
         <Typography
           variant="h6"
           align="left"
@@ -145,8 +93,6 @@ const CartPayment = (props) => {
             required
             id="outlined-required"
             label="Numero de la tarjeta"
-            //sx={{ width: "50ch" }}
-
             value={formik.values.number}
             error={!!formik.errors.number}
             onChange={(event) =>
@@ -201,7 +147,7 @@ const CartPayment = (props) => {
         <Grid item xs={12} sm={12}>
           <Button
             variant="outlined"
-            color="inherit"
+            color="primary"
             size="large"
             fullWidth
             onClick={() => {

@@ -9,29 +9,20 @@ const ProductPrice = (props) => {
     <>
       {discount && (
         <>
-          <>
-            <Typography variant="h7" component="div" sx={{ mt: 2 }}>
-              Antes: ${mountNormalize(price)}
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              color="#bc0e0d"
-            >
-              Ahora: ${mountNormalize(price - mountDiscount)} (-
-              {discount}%)
-            </Typography>
-          </>
+          <Typography variant="h7" component="div" sx={{ mt: 4 }}>
+            Antes: ${mountNormalize(price)}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div" color="primary">
+            Ahora: ${mountNormalize(price - mountDiscount)} (-
+            {discount}%)
+          </Typography>
         </>
       )}
 
       {!discount && (
-        <>
-          <Typography variant="h5" component="div">
-            ${mountNormalize(price)}
-          </Typography>
-        </>
+        <Typography variant="h5" component="div" sx={{ mt: 4 }}>
+          ${mountNormalize(price)}
+        </Typography>
       )}
     </>
   );

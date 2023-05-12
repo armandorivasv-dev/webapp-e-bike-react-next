@@ -4,8 +4,8 @@ import { DashboardLayout } from "../dashboard-layout";
 import FavoriteList from "@/components/Favorite/FavoriteList";
 import { getFavoriteApi } from "@/services/api/favorite";
 import useAuth from "@/hooks/useAuth";
-import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
+import Loading from "@/components/Loading/Loading";
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState(null);
@@ -19,13 +19,14 @@ const Favorites = () => {
     })();
     setReloadFavorites(false);
   }, [reloadFavorites]);
+
   return (
     <main className={styles.main}>
       <Typography variant="h5" align="left" color="text.secondary" paragraph>
         Favoritos
       </Typography>
       {!favorites ? (
-        <h1>Cargando</h1>
+        <Loading text={"Cargando productos..."} />
       ) : favorites.length === 0 ? (
         <Typography
           variant="h6"

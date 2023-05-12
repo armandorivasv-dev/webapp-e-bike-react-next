@@ -8,6 +8,7 @@ import useAuth from "@/hooks/useAuth";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
+import Loading from "@/components/Loading/Loading";
 
 const Address = () => {
   const [addresses, setAddresses] = useState("");
@@ -23,20 +24,16 @@ const Address = () => {
     })();
   }, []);
 
-  console.log("addresses in address", addresses);
-
   return (
     <main className={styles.main}>
       <div>
-        <Typography variant="h6" align="left" color="text.secondary" paragraph>
+        <Typography variant="h5" align="left" color="text.secondary" paragraph>
           Mis direcciones
         </Typography>
       </div>
 
       {!addresses ? (
-        <Typography variant="h7" align="left" color="text.secondary" paragraph>
-          Cargando direcciones...
-        </Typography>
+        <Loading text={"Cargando direcciones..."} />
       ) : addresses.length === 0 ? (
         <Typography variant="h7" align="left" color="text.secondary" paragraph>
           No tienes direcciones registradas, crea tu primera dirección...
@@ -54,7 +51,7 @@ const Address = () => {
         <div>
           <Button
             variant="outlined"
-            color="inherit"
+            color="primary"
             size="large"
             fullWidth
             onClick={() => {

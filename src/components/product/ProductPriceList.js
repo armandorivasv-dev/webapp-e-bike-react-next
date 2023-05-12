@@ -27,7 +27,7 @@ const ProductPriceList = (props) => {
               <Typography
                 variant="h7"
                 component="div"
-                color="#bc0e0d"
+                color="primary"
                 sx={{ ml: 2 }}
               >
                 ${mountNormalize(price - mountDiscount)} (-

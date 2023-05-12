@@ -4,35 +4,30 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { deleteAddressApi } from "@/services/api/address";
-import useAuth from "@/hooks/useAuth";
-import toast, { Toaster } from "react-hot-toast";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import Grid from "@mui/material/Grid";
 import { useRouter } from "next/router";
+import Loading from "../Loading/Loading";
 
 const CartAddressList = (props) => {
   const { addresses, selectedAddress, setSelectedAddress } = props;
 
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(() => {
+    if (addresses.length === 0) {
+      return "";
+    } else {
+      return addresses[0].id;
+    }
+  });
 
   const { push } = useRouter();
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
-
-  console.log("addresses", addresses);
-  console.log("value", value);
 
   useEffect(() => {
     const filter = addresses.filter(
@@ -61,14 +56,7 @@ const CartAddressList = (props) => {
           onChange={handleChange}
         >
           {!addresses ? (
-            <Typography
-              variant="h7"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              Cargando direcciones...
-            </Typography>
+            <Loading text={"Cargando direcciones..."} />
           ) : addresses.length === 0 ? (
             <>
               <Typography
@@ -100,6 +88,7 @@ const CartAddressList = (props) => {
                     display: "flex",
                     justifyContent: "space-between",
                     mb: 2,
+                    bgcolor: "#e3f2fd",
                   }}
                 >
                   <CardContent>
@@ -112,14 +101,7 @@ const CartAddressList = (props) => {
                       color="text.secondary"
                       component="h1"
                     >
-                      {address.attributes.name_lastname}
-                    </Typography>
-
-                    <Typography
-                      variant="body1"
-                      color="text.secondary"
-                      component="h1"
-                    >
+                      {address.attributes.name_lastname},{" "}
                       {address.attributes.address}
                     </Typography>
 
@@ -140,13 +122,7 @@ const CartAddressList = (props) => {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Grid
-                      container
-                      direction="colunm"
-                      justifyContent="center"
-                      alignItems="center"
-                      width="50px"
-                    >
+                    <Grid container alignItems="center" width="50px">
                       <FormControlLabel
                         value={address.id}
                         control={<Radio />}

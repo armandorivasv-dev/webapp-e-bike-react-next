@@ -35,7 +35,6 @@ export async function addAddressApi(auth, formData) {
     };
 
     const response = await fetch(url, params);
-    console.log("params", params);
     const result = await response.json();
     return result;
   } catch (error) {

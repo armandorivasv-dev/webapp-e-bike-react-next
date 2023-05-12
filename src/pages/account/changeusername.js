@@ -30,7 +30,6 @@ const ChangeUsername = () => {
   useEffect(() => {
     (async () => {
       const response = await getUserApi(auth.token);
-      console.log("changename - response ->", response);
       await formik.setFieldValue("username", response.username);
     })();
   }, []);
@@ -97,7 +96,7 @@ const ChangeUsername = () => {
           />
           <Button
             variant="outlined"
-            color="inherit"
+            color="primary"
             onClick={() => {
               handleClickOpen();
             }}

@@ -3,11 +3,10 @@ import CartListItem from "./CartListItem";
 import { getProductItemApi } from "@/services/api/products";
 import { Typography } from "@mui/material";
 import { mountNormalize, calcPrice } from "@/utils/functions";
+import Loading from "../Loading/Loading";
 
 const CartList = (props) => {
   const { cart, products, setProducts, setReloadCart, setTotalPayment } = props;
-  console.log("cart", cart);
-  console.log("products", products);
 
   useEffect(() => {
     (async () => {
@@ -15,7 +14,6 @@ const CartList = (props) => {
       let totalPaymentTemp = 0;
       for await (const product of cart) {
         const response = await getProductItemApi(product.idProduct);
-        console.log("cartlist - response", response);
         response.quantity = product.quantity;
         productsTemp.push(response);
         totalPaymentTemp +=
@@ -32,7 +30,7 @@ const CartList = (props) => {
   return (
     <>
       {!products ? (
-        <h1>Cargando...</h1>
+        <Loading text={"Cargando productos..."} />
       ) : (
         <>
           <Typography

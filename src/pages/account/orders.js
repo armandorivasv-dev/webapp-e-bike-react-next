@@ -6,6 +6,7 @@ import useAuth from "@/hooks/useAuth";
 import { getOrdersApi } from "@/services/api/order";
 import { Typography } from "@mui/material";
 import OrderIndicator from "@/components/Order/OrderIndicator";
+import Loading from "@/components/Loading/Loading";
 
 const Orders = () => {
   const { auth } = useAuth();
@@ -15,7 +16,6 @@ const Orders = () => {
     (async () => {
       const response = await getOrdersApi(auth);
       setOrders(response.data);
-      console.log("response", response.data);
     })();
   }, []);
 
@@ -26,7 +26,7 @@ const Orders = () => {
       </Typography>
 
       {!orders ? (
-        <h1>Cargando...</h1>
+        <Loading text={"Cargando pedidos..."} />
       ) : orders.length === 0 ? (
         <Typography
           variant="h6"
@@ -34,7 +34,7 @@ const Orders = () => {
           color="text.secondary"
           paragraph
         >
-          No ha comprado ningun producto...
+          No ha comprado ningun producto
         </Typography>
       ) : (
         <>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/material";
@@ -10,7 +9,7 @@ const DashboardLayoutRoot = styled("div")(({ theme }) => ({
   maxWidth: "100%",
   paddingTop: 64,
   [theme.breakpoints.up("lg")]: {
-    paddingLeft: 280,
+    paddingLeft: 240,
   },
 }));
 

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import {

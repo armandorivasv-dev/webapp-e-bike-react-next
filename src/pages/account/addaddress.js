@@ -7,15 +7,13 @@ import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import useAuth from "@/hooks/useAuth";
 import { addAddressApi } from "@/services/api/address";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 const AddAddress = () => {
@@ -37,6 +35,7 @@ const AddAddress = () => {
       // setLoading(false);
     },
   });
+
   //dialog
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -58,6 +57,7 @@ const AddAddress = () => {
     <main className={styles.main}>
       <Box
         component="form"
+        p={2}
         sx={{
           "& .MuiTextField-root": { mb: 2, mr: 2, width: "39ch" },
           "& .MuiButton-root": { width: "43ch", height: "55px", mr: 2 },
@@ -168,7 +168,7 @@ const AddAddress = () => {
         <div>
           <Button
             variant="outlined"
-            color="inherit"
+            color="primary"
             size="large"
             fullWidth
             onClick={() => {
@@ -179,7 +179,7 @@ const AddAddress = () => {
           </Button>
           <Button
             variant="outlined"
-            color="inherit"
+            color="primary"
             size="large"
             fullWidth
             onClick={() => {

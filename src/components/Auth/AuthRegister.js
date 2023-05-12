@@ -11,9 +11,13 @@ import * as Yup from "yup";
 import logo from "../../../public/assets/logo.png";
 import Image from "next/image";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const AuthRegister = (props) => {
   const { changeForm } = props;
+
+  const { push } = useRouter();
+
   const [message, setMessage] = useState(
     "Ingrese datos necesarios para el registro"
   );
@@ -22,8 +26,6 @@ const AuthRegister = (props) => {
     initialValues: initialValues(),
     validationSchema: Yup.object(validationSchema()),
     onSubmit: async (formData) => {
-      console.log("AuthRegister - formData--->", formData);
-
       try {
         const response = await registerApi(formData);
         if (response.error) throw "Email o username ya existe!!!";
@@ -43,9 +45,6 @@ const AuthRegister = (props) => {
           alignItems: "center",
         }}
       >
-        {/* <Avatar sx={{ m: 1, bgcolor: 'secundary.main' }}>
-      <LockOutlinedIcon />
-    </Avatar> */}
         <Image width="100" height="100" alt="Images" src={logo} />
         <Typography
           variant="h6"
@@ -60,7 +59,6 @@ const AuthRegister = (props) => {
           sx={{ m: 1, width: "40ch" }}
           noValidate
           autoComplete="on"
-          //onSubmit={() => formik.handleSubmit()}
         >
           <TextField
             margin="normal"

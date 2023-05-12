@@ -6,22 +6,22 @@ import { API_URL } from "../../utils/constants";
 import Image from "next/image";
 import Grid from "@mui/material/Grid";
 import Link from "next/link";
+import Loading from "../Loading/Loading";
 
 const ProductCarousel = () => {
   const [images, setImages] = useState(null);
   useEffect(() => {
     (async () => {
       const response = await getCarouselApi();
-      console.log("response", response.data);
       setImages(response.data);
     })();
   }, []);
 
   return (
     <>
-      <Grid container sx={{ maxWidth: 1490 }}>
+      <Grid container>
         {!images ? (
-          <h1>Cargando...</h1>
+          <Loading text={"Cargando carousel..."} />
         ) : (
           <Carousel
             showArrows={true}

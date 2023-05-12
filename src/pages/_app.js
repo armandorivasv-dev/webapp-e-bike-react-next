@@ -11,15 +11,11 @@ import {
 import jwtDecode from "jwt-decode";
 import ResponsiveDrawer from "@/components/Menu/ResponsiveDrawer";
 import { getProductCartApi } from "@/services/api/cart";
-//import { ThemeProvider } from "@mui/material/styles";
-//import { themeCustom } from "@/theme/theme";
 
 export default function App({ Component, pageProps }) {
   const [auth, setAuth] = useState(undefined);
   const getLayout = Component.getLayout || ((page) => page);
   const [badgeCart, setBadgeCart] = useState(null);
-
-  console.log("badgeCart", badgeCart);
 
   useEffect(() => {
     (async () => {
@@ -62,8 +58,6 @@ export default function App({ Component, pageProps }) {
 
     [badgeCart]
   );
-
-  console.log("badgeData", badgeData);
 
   const authData = useMemo(
     () => ({

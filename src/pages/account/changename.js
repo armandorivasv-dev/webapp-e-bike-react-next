@@ -1,4 +1,3 @@
-"use client";
 import styles from "@/styles/Account.module.css";
 import { DashboardLayout } from "../dashboard-layout";
 import Box from "@mui/material/Box";
@@ -23,8 +22,6 @@ const ChangeName = () => {
 
   const { push } = useRouter();
 
-  const [loading, setLoading] = useState(true);
-
   const notifyOk = () => toast("Datos actualizados.");
 
   const notifyError = () => toast("Error al actualizar los datos.");
@@ -32,7 +29,6 @@ const ChangeName = () => {
   useEffect(() => {
     (async () => {
       const response = await getUserApi(auth.token);
-      console.log("changename - response ->", response);
       if (response.name && response.lastname) {
         await formik.setFieldValue("name", response.name);
         await formik.setFieldValue("lastname", response.lastname);
@@ -80,7 +76,6 @@ const ChangeName = () => {
       >
         <div>
           <Typography
-            Typography
             variant="h5"
             align="left"
             color="text.secondary"
@@ -114,7 +109,7 @@ const ChangeName = () => {
           />
           <Button
             variant="outlined"
-            color="inherit"
+            color="primary"
             onClick={() => {
               handleClickOpen();
             }}
@@ -122,7 +117,6 @@ const ChangeName = () => {
             <span>CAMBIAR NOMBRES Y APELLIDOS</span>
           </Button>
         </div>
-        <div></div>
       </Box>
       <Toaster position="top-center" duration="4000" />
 

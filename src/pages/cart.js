@@ -5,10 +5,11 @@ import CartPayment from "@/components/Cart/CartPayment";
 import { DashboardLayout } from "./dashboard-layout";
 import { getProductCartApi } from "@/services/api/cart";
 import { getAddressesApi } from "@/services/api/address";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/Account.module.css";
 
 import { Typography } from "@mui/material";
 import useAuth from "@/hooks/useAuth";
+import Loading from "@/components/Loading/Loading";
 
 const Cart = () => {
   const [cart, setCart] = useState(null);
@@ -76,7 +77,7 @@ const Cart = () => {
           />
 
           {!addresses ? (
-            <h1>Cargando...</h1>
+            <Loading text={"Cargando direcciones..."} />
           ) : (
             <CartAddressList
               addresses={addresses}

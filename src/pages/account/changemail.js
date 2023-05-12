@@ -22,8 +22,6 @@ const ChangeMail = () => {
 
   const { push } = useRouter();
 
-  const [loading, setLoading] = useState(true);
-
   const notifyOk = () => toast("Datos actualizados.");
 
   const notifyError = () => toast("Error al actualizar los datos.");
@@ -31,7 +29,6 @@ const ChangeMail = () => {
   useEffect(() => {
     (async () => {
       const response = await getUserApi(auth.token);
-      console.log("changename - response ->", response);
       await formik.setFieldValue("email", response.email);
     })();
   }, []);
@@ -76,7 +73,6 @@ const ChangeMail = () => {
       >
         <div>
           <Typography
-            Typography
             variant="h5"
             align="left"
             color="text.secondary"
@@ -99,7 +95,7 @@ const ChangeMail = () => {
           />
           <Button
             variant="outlined"
-            color="inherit"
+            color="primary"
             onClick={() => {
               handleClickOpen();
             }}

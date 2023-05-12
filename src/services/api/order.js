@@ -3,8 +3,6 @@ import { API_URL } from "../../utils/constants";
 
 export const getOrdersApi = async (auth) => {
   try {
-    console.log("auth.idUser", auth.idUser);
-    //const url = `${API_URL}/api/orders?user=${auth.idUser}&populate[product][populate]=main_image`;
     const url = `${API_URL}/api/orders?filters[user]=${auth.idUser}&populate[product][populate]=main_image`;
     const params = {
       method: "GET",
@@ -16,7 +14,6 @@ export const getOrdersApi = async (auth) => {
 
     const response = await fetch(url, params);
     const result = await response.json();
-    console.log("result", result);
     return result;
   } catch (error) {
     console.log(error);

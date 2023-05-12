@@ -23,8 +23,6 @@ const ChangePassword = () => {
 
   const { push } = useRouter();
 
-  const [loading, setLoading] = useState(true);
-
   const notifyOk = () => toast("Datos actualizados.");
 
   const notifyError = () => toast("Error al actualizar los datos.");
@@ -32,7 +30,6 @@ const ChangePassword = () => {
   useEffect(() => {
     (async () => {
       const response = await getUserApi(auth.token);
-      console.log("changename - response ->", response);
       await formik.setFieldValue("password", response.password);
     })();
   }, []);
@@ -73,7 +70,6 @@ const ChangePassword = () => {
           "& .MuiButton-root": { width: "43ch", height: "55px" },
         }}
         noValidate
-        autoComplete="on"
       >
         <div>
           <Typography
@@ -93,7 +89,7 @@ const ChangePassword = () => {
             label="Nueva contraseña"
             type="password"
             helperText="Mínimo 6 Caracteres"
-            value={formik.values.password}
+            value={formik.values.password || ""}
             error={formik.errors.password}
             onChange={(event) =>
               formik.setFieldValue("password", event.target.value)
@@ -106,7 +102,7 @@ const ChangePassword = () => {
             label="Repetir contraseña"
             type="password"
             helperText="Mínimo 6 Caracteres"
-            value={formik.values.repeatPassword}
+            value={formik.values.repeatPassword || ""}
             error={formik.errors.repeatPassword}
             onChange={(event) =>
               formik.setFieldValue("repeatPassword", event.target.value)
@@ -114,7 +110,7 @@ const ChangePassword = () => {
           />
           <Button
             variant="outlined"
-            color="inherit"
+            color="primary"
             sx={{ height: "55px" }}
             //onClick={formik.handleSubmit}
             onClick={() => {
